@@ -65,7 +65,14 @@ jobs:
 
       - name: Create Release
         if: env.exists == 'false'
-        run: |
-            gh release create "v${{ env.version }}" --title "v${{ env.version }}" --notes "${{ env.release_notes }}"
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@{latest-release}
+        with:
+          mode: "COMMIT"
+          configurationJson: |
+            {
+              "template": "#{{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n#{{UNCATEGORIZED}}\n</details>",
+              "contributors": "#{{CONTRIBUTORS}}"
+            }
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
