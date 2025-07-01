@@ -51,20 +51,24 @@ jobs:
           mode: "HYBRID"
           configurationJson: |
             {
-             "pr_template": "- #{{TITLE}}\n   - PR: ##{{NUMBER}}",
-             "commit_template": "- #{{TITLE}} by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{MERGE_SHA}}",
+             "pr_template": "- **#{{TITLE}}** by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in [#{{NUMBER}}](#{{URL}})",
+             "commit_template": "- **#{{TITLE}}** by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{MERGE_SHA}}",
              "categories": [
+               {
+                    "title": "## Changes",
+                    "labels": []
+                },
                 {
                     "title": "## Features",
                     "labels": ["feat", "feature"]
                 },
                 {
-                    "title": "## Fixs",
+                    "title": "## Fixes",
                     "labels": ["fix", "bug"]
                 },
                 {
-                    "title": "## Others",
-                    "labels": []
+                    "title": "## Tests",
+                    "labels": [test]
                 }
               ],
               "label_extractor": [
