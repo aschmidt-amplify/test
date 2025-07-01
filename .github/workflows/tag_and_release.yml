@@ -51,7 +51,7 @@ jobs:
           mode: "HYBRID"
           configurationJson: |
             {
-             "pr_template": "- **#{{TITLE}}** by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in [#{{NUMBER}}]({{URL}})",
+             "pr_template": "- **#{{TITLE}}** by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in [#{{NUMBER}}]({{URL}}) URL: #{{URL}}",
              "commit_template": "- **#{{TITLE}}** by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{MERGE_SHA}}",
              "categories": [
                 {
