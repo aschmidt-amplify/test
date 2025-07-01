@@ -51,8 +51,8 @@ jobs:
           mode: "COMMIT"
           configurationJson: |
             {
-             "template": "#{{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n#{{UNCATEGORIZED}}\n</details>",
-             "commit_template": "- #{{TITLE}}\n   - PR: ##{{NUMBER}}\n   - SHA: #{{MERGE_SHA}}\n   - by #{{AUTHOR}}"
+             "template": "#{{CHANGELOG}}",
+             "commit_template": "- #{{TITLE}} by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{MERGE_SHA}}"
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
