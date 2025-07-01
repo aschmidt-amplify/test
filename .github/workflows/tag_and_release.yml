@@ -51,8 +51,12 @@ jobs:
           mode: "COMMIT"
           configurationJson: |
             {
-              "template": "#{{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n#{{UNCATEGORIZED}}\n</details>",
-              "contributors": "#{{CONTRIBUTORS}}"
+              "template": "# Changelog for v${{ env.version }}\n\n## Changes\n{{COMMITS}}\n\n## Contributors\n{{CONTRIBUTORS}}",
+              "commit": {
+                "title": "- {{MESSAGE}} [view commit]({{COMMITS}})",
+                "message": "- {{SCOPE}}: {{MESSAGE}} by {{AUTHOR}} [view commit]({{URL}})"
+              },
+              "contributors": "Thanks to the following contributors: {{CONTRIBUTORS}}"
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
