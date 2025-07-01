@@ -47,6 +47,6 @@ jobs:
       - name: Create Release
         if: env.exists == 'false'
         run: |
-            gh release create "v${{ env.version }}" --title "v${{ env.version }}" --notes-from-tag
+            gh release create "v${{ env.version }}" --title "v${{ env.version }}" --notes-auto
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
