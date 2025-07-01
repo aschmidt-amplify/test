@@ -73,7 +73,8 @@ jobs:
                   "on_property": "title",
                   "target": "$1"
                 }
-              ]
+              ],
+              "template": "#{{CHANGELOG}}\n## Contributors:\n- #{{CONTRIBUTORS}}"
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
