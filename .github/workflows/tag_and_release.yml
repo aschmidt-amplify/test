@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3  # Ensure a stable version of checkout action is used
 
       - name: Get version from DESCRIPTION
         id: version
@@ -43,8 +43,7 @@ jobs:
           git tag -a "v${{ env.version }}" -m "Release v${{ env.version }}"
           git push origin "v${{ env.version }}"
 
-
-      - name: Create Release
+      - name: Create Changelog
         if: env.exists == 'false'
         id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v5
@@ -55,5 +54,13 @@ jobs:
               "template": "#{{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n#{{UNCATEGORIZED}}\n</details>",
               "contributors": "#{{CONTRIBUTORS}}"
             }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        if: env.exists == 'false'
+        run: |
+          changelog=$(cat ./YOUR_CHANGELOG_PATH) # Ensure you have the output path correct from the changelog action
+          gh release create "v${{ env.version }}" --title "v${{ env.version }}" --notes "$changelog"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
