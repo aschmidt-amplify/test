@@ -51,7 +51,7 @@ jobs:
           mode: "COMMIT"
           configurationJson: |
             {
-             "template": "#{{CHANGELOG}}",
+             "pr_template": "- #{{TITLE}}\n   - PR: ##{{NUMBER}}",
              "commit_template": "- #{{TITLE}} by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{MERGE_SHA}}"
             }
         env:
