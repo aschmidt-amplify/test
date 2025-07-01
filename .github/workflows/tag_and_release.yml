@@ -32,7 +32,7 @@ jobs:
       - name: Exit if Tag Exists
         if: env.exists == 'true'
         run: |
-          echo "The tag v${{ env.version }} already exists. Exiting without creating a new release."
+          echo "::warning The tag v${{ env.version }} already exists. Exiting without creating a new release."
           exit 0
 
       - name: Tag the current commit
