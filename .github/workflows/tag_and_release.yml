@@ -52,7 +52,13 @@ jobs:
           configurationJson: |
             {
              "pr_template": "- #{{TITLE}}\n   - PR: ##{{NUMBER}}",
-             "commit_template": "- #{{TITLE}} by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{MERGE_SHA}}"
+             "commit_template": "- #{{TITLE}} by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{MERGE_SHA}}",
+             "categories": [
+                {
+                    "title": "## What's new",
+                    "labels": []
+                },
+              }
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
