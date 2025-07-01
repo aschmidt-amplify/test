@@ -53,10 +53,10 @@ jobs:
             {
               "template": "# Changelog for v${{ env.version }}\n\n## Changes\n{{COMMITS}}\n\n## Contributors\n{{CONTRIBUTORS}}",
               "commit": {
-                "title": "- {{MESSAGE}} [view commit]({{COMMITS}})",
-                "message": "- {{SCOPE}}: {{MESSAGE}} by {{AUTHOR}} [view commit]({{URL}})"
+                "title": "- #{{MESSAGE}} [view commit](#{{COMMITS}})",
+                "message": "- #{{SCOPE}}: #{{MESSAGE}} by #{{AUTHOR}} [view commit](#{{URL}})"
               },
-              "contributors": "Thanks to the following contributors: {{CONTRIBUTORS}}"
+              "contributors": "Thanks to the following contributors: #{{CONTRIBUTORS}}"
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
