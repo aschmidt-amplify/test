@@ -53,8 +53,8 @@ jobs:
             {
               "template": "# Changelog for v${{ env.version }}\n\n## Changes\n{{COMMITS}}\n\n## Contributors\n{{CONTRIBUTORS}}",
               "commit": {
-                "title": "- #{{MESSAGE}} [view commit](#{{COMMITS}})",
-                "message": "- #{{SCOPE}}: #{{MESSAGE}} by #{{AUTHOR}} [view commit](#{{URL}})"
+                "title": "- #{{TITLE}} [view commit](#{{COMMITS}})",
+                "message": "- #{{SCOPE}}: #{{BODY}} by #{{AUTHOR}} [view commit](#{{MERGE_SHA}})"
               },
               "contributors": "Thanks to the following contributors: #{{CONTRIBUTORS}}"
             }
