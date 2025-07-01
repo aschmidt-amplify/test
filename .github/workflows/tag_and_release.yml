@@ -72,7 +72,7 @@ jobs:
                   "target": "$1"
                 }
               ],
-              "template": "#{{CHANGELOG}}\n### Contributors:\n- #{{CONTRIBUTORS}}"
+              "template": "#{{CHANGELOG}}\n#{{FROM_TAG}}\n#{{TO_TAG}}\n#{{RELEASE_DIFF}}\n### Contributors:\n- #{{CONTRIBUTORS}}"
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
