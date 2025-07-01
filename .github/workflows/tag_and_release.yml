@@ -48,17 +48,32 @@ jobs:
         id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v5
         with:
-          mode: "COMMIT"
+          mode: "HYBRID"
           configurationJson: |
             {
              "pr_template": "- #{{TITLE}}\n   - PR: ##{{NUMBER}}",
              "commit_template": "- #{{TITLE}} by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{MERGE_SHA}}",
              "categories": [
                 {
-                    "title": "## What's new",
-                    "labels": []
+                    "title": "## Features",
+                    "labels": ["feat", "feature"]
                 },
-              }
+                {
+                    "title": "## Fixs",
+                    "labels": ["fix", "bug"]
+                },
+                {
+                    "title": "## Others",
+                    "labels": []
+                }
+              ],
+              "label_extractor": [
+                {
+                  "pattern": "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\\([\\w\\-\\.]+\\))?(!)?: ([\\w ])+([\\s\\S]*)",
+                  "on_property": "title",
+                  "target": "$1"
+                }
+              ]
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
