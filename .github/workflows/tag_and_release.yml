@@ -13,6 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install GitHub CLI
+        uses: actions/setup-gh@v1
+
+      - name: Authenticate GitHub CLI
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
       - name: Get version from DESCRIPTION
         id: version
         run: |
@@ -43,12 +49,10 @@ jobs:
           git tag -a "v${{ env.version }}" -m "Release v${{ env.version }}"
           git push origin "v${{ env.version }}"
 
+
       - name: Create Release
         if: env.exists == 'false'
-        uses: softprops/action-gh-release@v1
-        with:
-          body_path: NEWS.md
-          tag_name: "v${{ env.version }}"
-          name: "v${{ env.version }}"
+        run: |
+            gh release create "v${{ env.version }}" --title "v${{ env.version }}" --generate-notes
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
