@@ -1,0 +1,67 @@
+Package: amplifyR
+Title: amplifyR: Query and Analyze Amplify Data
+Version: 3.9.1
+Authors@R: c(
+    person(given = "Deena",
+           family = "Bernett",
+           role = c("aut"),
+           email = "dbernett@amplify.com"),
+    person(given = "Samuel",
+           family = "Crane",
+           role = c("aut"),
+           email = "scrane@amplify.com"),
+    person(given = "Harry",
+           family = "Gamble",
+           role = c("aut"),
+           email = "hgamble@amplify.com"),
+    person(given = "Ludmila",
+           family = "Janda",
+           role = c("aut"),
+           email = "ljanda@amplify.com"),
+    person(given = "Tashi",
+           family = "Lama",
+           role = c("aut"),
+           email = "tlama@amplify.com"),
+    person(given = "Anthony",
+           family = "Schmidt",
+           role = c("aut", "cre"),
+           email = "aschmidt@amplify.com"))
+Description: Allows users to connect with the Amplify data warehouse and query Amplify data
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Imports:
+    tidyverse,
+    knitr,
+    kableExtra,
+    odbc,
+    DBI,
+    keyring,
+    magrittr,
+    crayon,
+    extrafont,
+    janitor,
+    flextable,
+    glue,
+    devtools (>= 2.4.5),
+    httr (>= 1.4.7),
+    stringr (>= 1.5.1),
+    gitcreds (>= 0.1.2),
+    remotes (>= 2.5.0),
+    curl (>= 6.0.1),
+    here,
+    officer (>= 0.6.7),
+    rmarkdown (>= 2.29),
+    googledrive (>= 2.1.1),
+    credentials (>= 2.0.2)
+Suggests: 
+    devtools,
+    knitr,
+    ragg,
+    testthat (>= 3.0.0),
+    uuid
+VignetteBuilder: knitr
+Depends: 
+    R (>= 3.5)
+Config/testthat/edition: 3
