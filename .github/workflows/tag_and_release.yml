@@ -50,7 +50,7 @@ jobs:
         with:
           configurationJson: |
             {
-             "pr_template": "- **#{{TITLE}}** by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{URL}}",
+             "pr_template": "- #{{TITLE}} by **[#{{AUTHOR}}](https://github.com/#{{AUTHOR}})** in #{{URL}}",
              "categories": [
                 {
                     "title": "## 🚀 Features",
@@ -72,7 +72,7 @@ jobs:
                   "target": "$1"
                 }
               ],
-              "template": "#{{CHANGELOG}}\n#{{FROM_TAG}}\n#{{TO_TAG}}\n#{{RELEASE_DIFF}}\n### Contributors:\n- #{{CONTRIBUTORS}}"
+              "template": "#{{CHANGELOG}}\n**Full Changelog**: #{{RELEASE_DIFF}}"
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
