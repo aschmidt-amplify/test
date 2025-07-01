@@ -1,0 +1,10 @@
+name-template: 'v${{ version }}'
+tag-template: 'v${{ version }}'
+change-template: '- ${{ PR.title }} (#${{ PR.number }}) by @${{ PR.author }}'
+template: |
+  ## What's Changed
+
+  $CHANGES
+
+  **Contributors:** Thanks to @${{ CONTRIBUTORS }} for their contributions to this release.
+publish: true  # This ensures the release is published immediately
