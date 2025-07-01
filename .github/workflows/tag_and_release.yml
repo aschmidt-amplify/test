@@ -19,25 +19,6 @@ jobs:
           version=$(grep '^Version: ' DESCRIPTION | sed 's/Version: //')
           echo "version=${version}" >> $GITHUB_ENV
 
-      - name: Fetch all tags
-        run: git fetch --tags
-
-      - name: Get Previous Tag
-        id: prev_tag
-        run: echo "previous_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-
-      - name: Generate Release Notes
-        id: generate_notes
-        run: |
-          if [ -z "${{ env.previous_tag }}" ]; then
-            commits=$(git log --oneline)
-          else
-            commits=$(git log --oneline ${{ env.previous_tag }}..HEAD)
-          fi
-          # Optionally, format these commits or add PR information
-          echo "release_notes=${commits}" >> $GITHUB_ENV
-
-
       - name: Check if Tag Exists on Remote
         id: check_tag_exists
         run: |
