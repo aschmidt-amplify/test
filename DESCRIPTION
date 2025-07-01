@@ -1,6 +1,6 @@
 Package: amplifyR
 Title: amplifyR: Query and Analyze Amplify Data
-Version: 3.9.9
+Version: 3.9.10
 Authors@R: c(
     person(given = "Deena",
            family = "Bernett",
