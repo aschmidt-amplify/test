@@ -60,6 +60,7 @@ jobs:
       - name: Create Release
         uses: mikepenz/action-gh-release@v0.2.0-a03
         with:
+          tag_name: v${{ env.version }}
           body: ${{steps.github_release.outputs.changelog}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
