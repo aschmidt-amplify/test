@@ -19,11 +19,11 @@ jobs:
           version=$(grep '^Version: ' DESCRIPTION | sed 's/Version: //')
           echo "version=${version}" >> $GITHUB_ENV
 
-      - name: Check if Tag Exists
+      - name: Check if Tag Exists on Remote
         id: check_tag_exists
         run: |
-          if git rev-parse "v${{ env.version }}" >/dev/null 2>&1; then
-            echo "Tag v${{ env.version }} already exists."
+          if git ls-remote --tags origin "v${{ env.version }}" | grep "refs/tags/v${{ env.version }}" >/dev/null; then
+            echo "Tag v${{ env.version }} already exists on remote."
             echo "exists=true" >> $GITHUB_ENV
           else
             echo "exists=false" >> $GITHUB_ENV
