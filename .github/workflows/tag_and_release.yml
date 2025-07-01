@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get version from DESCRIPTION
+        id: version
+        run: |
+          version=$(grep '^Version: ' DESCRIPTION | sed 's/Version: //')
+          echo "version=${version}" >> $GITHUB_ENV
+
+      - name: Tag the current commit
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git tag -a "v${{ env.version }}" -m "Release v${{ env.version }}"
+          git push origin "v${{ env.version }}"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: NEWS.md
+          tag_name: "v${{ env.version }}"
+          name: "v${{ env.version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
