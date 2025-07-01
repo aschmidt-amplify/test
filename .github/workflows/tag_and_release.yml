@@ -57,10 +57,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create GitHub Release
-        if: env.exists == 'false'
-        run: |
-          changelog=$(cat ./YOUR_CHANGELOG_PATH) # Ensure you have the output path correct from the changelog action
-          gh release create "v${{ env.version }}" --title "v${{ env.version }}" --notes "$changelog"
+      - name: Create Release
+        uses: mikepenz/action-gh-release@v0.2.0-a03
+        with:
+          body: ${{steps.github_release.outputs.changelog}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
