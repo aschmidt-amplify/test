@@ -19,7 +19,24 @@ jobs:
           version=$(grep '^Version: ' DESCRIPTION | sed 's/Version: //')
           echo "version=${version}" >> $GITHUB_ENV
 
+      - name: Check if Tag Exists
+        id: check_tag_exists
+        run: |
+          if git rev-parse "v${{ env.version }}" >/dev/null 2>&1; then
+            echo "Tag v${{ env.version }} already exists."
+            echo "exists=true" >> $GITHUB_ENV
+          else
+            echo "exists=false" >> $GITHUB_ENV
+          fi
+
+      - name: Exit if Tag Exists
+        if: env.exists == 'true'
+        run: |
+          echo "The tag v${{ env.version }} already exists. Exiting without creating a new release."
+          exit 0
+
       - name: Tag the current commit
+        if: env.exists == 'false'
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
@@ -27,6 +44,7 @@ jobs:
           git push origin "v${{ env.version }}"
 
       - name: Create Release
+        if: env.exists == 'false'
         uses: softprops/action-gh-release@v1
         with:
           body_path: NEWS.md
