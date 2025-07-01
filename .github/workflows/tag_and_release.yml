@@ -54,20 +54,20 @@ jobs:
              "commit_template": "- **#{{TITLE}}** by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{MERGE_SHA}}",
              "categories": [
                {
-                    "title": "## Changes",
+                    "title": "## 📦 Changes",
                     "labels": []
                 },
                 {
-                    "title": "## Features",
+                    "title": "## 🚀 Features",
                     "labels": ["feat", "feature"]
                 },
                 {
-                    "title": "## Fixes",
+                    "title": "## 🐛 Fixes",
                     "labels": ["fix", "bug"]
                 },
                 {
-                    "title": "## Tests",
-                    "labels": [test]
+                    "title": "## 🧪 Tests",
+                    "labels": ['test']
                 }
               ],
               "label_extractor": [
