@@ -11,13 +11,32 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Use commonly recognized version
+        uses: actions/checkout@v4
 
       - name: Get version from DESCRIPTION
         id: version
         run: |
           version=$(grep '^Version: ' DESCRIPTION | sed 's/Version: //')
           echo "version=${version}" >> $GITHUB_ENV
+
+      - name: Fetch all tags
+        run: git fetch --tags
+
+      - name: Get Previous Tag
+        id: prev_tag
+        run: echo "previous_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
+      - name: Generate Release Notes
+        id: generate_notes
+        run: |
+          if [ -z "${{ env.previous_tag }}" ]; then
+            commits=$(git log --oneline)
+          else
+            commits=$(git log --oneline ${{ env.previous_tag }}..HEAD)
+          fi
+          # Optionally, format these commits or add PR information
+          echo "release_notes=${commits}" >> $GITHUB_ENV
+
 
       - name: Check if Tag Exists on Remote
         id: check_tag_exists
@@ -32,7 +51,7 @@ jobs:
       - name: Exit if Tag Exists
         if: env.exists == 'true'
         run: |
-          echo "::warning ::The tag v${{ env.version }} already exists. Exiting without creating a new release."
+          echo "::warning ::The tag v3.9.2 already exists. Exiting without creating a new release."
           exit 0
 
       - name: Tag the current commit
@@ -43,10 +62,10 @@ jobs:
           git tag -a "v${{ env.version }}" -m "Release v${{ env.version }}"
           git push origin "v${{ env.version }}"
 
+
       - name: Create Release
         if: env.exists == 'false'
-        uses: release-drafter/release-drafter@v6
-        with:
-          config-name: release-drafter.yml
+        run: |
+            gh release create "v${{ env.version }}" --title "v${{ env.version }}" --notes "${{ env.release_notes }}"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
