@@ -48,10 +48,9 @@ jobs:
         id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v5
         with:
-          mode: "HYBRID"
+          mode: "COMMIT"
           configurationJson: |
             {
-             "pr_template": "- **#{{TITLE}}** by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in [#{{NUMBER}}](#{{URL}})",
              "commit_template": "- **#{{TITLE}}** by [#{{AUTHOR}}](https://github.com/#{{AUTHOR}}) in #{{MERGE_SHA}}",
              "categories": [
                {
